@@ -1,0 +1,39 @@
+%\documentclass[14pt]{report}
+\documentclass[14pt]{../../DSTUreport/sty/DSTUReport} % Базовый стиль - поправленный стандартный report, они взаимозаменяемы
+
+\RequirePackage{../../DSTUreport/sty/DSTUExtra} % Расширение над DSTUReport, включая longtable, caption, biblatex и прочие must have пакеты
+
+% Не забудьте переключить титульный лист
+\RequirePackage{../../DSTUreport/sty/DSTUEskd} % Изменения стиля под ГОСТ 2.105
+
+\include{preamble.inc} % Особые пакеты для этого документа
+\include{macros.inc}   % Особые макросы для этого документа
+
+\begin{document}
+
+\include{00-title}
+
+\include{00-abstract}
+
+%\include{00-acro}
+
+%\include{10-intro}
+
+\include{11-description}
+
+%\include{80-conclusion}%% заключение
+
+%\include{81-biblio}
+
+\appendix   % Тут идут приложения
+
+%\include{90-appendix1}
+
+%\include{91-appendix2}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

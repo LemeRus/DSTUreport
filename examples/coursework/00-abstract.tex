@@ -1,0 +1,30 @@
+% Также можно использовать \Referat, как в оригинале
+%\begin{abstract}
+
+\ifDSTUHaveESKDFrame
+\makeatletter
+\def\@oddhead{\titleFrame}
+\def\@oddfoot{}
+\makeatother
+\fi
+
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\clearpage
+
+
+\ifDSTUHaveESKDFrame
+\clearpage
+\makeatletter
+\def\@oddhead{\mainFrame}
+\def\@oddfoot{}
+\makeatother
+\fi
+
+%\end{abstract}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "rpz"
+%%% End: 
