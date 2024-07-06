@@ -1,0 +1,280 @@
+% This package designed and commented in Russian (utf-8 encoding).
+%
+% Автор - Руслан Лемеров
+%
+% Используется совместно с классом DSTUReport и расширением DSTUExtra
+
+% Сокращения различных названий
+% !!! Изменять в преамбуле !!!
+\newcommand{\startDay}			{03}
+\newcommand{\startMonth}		{июня}
+\newcommand{\startYear}			{2024}
+\newcommand{\finalDay}			{03}
+\newcommand{\finalMonth}		{июля}
+\newcommand{\finalYear}			{2024}
+\newcommand{\finalDate}			{<<\finalDay>> \finalMonth\ \finalYear г.}
+\newcommand{\schoolNameFull}	{Институт опережающих технологий <<Школа Икс>>}
+\newcommand{\schoolName}		{ДГТУ ИОТ <<Школа Икс>>}
+\newcommand{\orgNameFull}		{
+	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ
+	ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ
+	«ДОНСКОЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ»
+	}
+\newcommand{\orgName}			{ФГБОУ ВО <<ДГТУ>>}
+\newcommand{\facKey}			{15.03.06}
+\newcommand{\facName}			{Мехатроника и робототехника}
+\newcommand{\decim}				{\facKey.930000.000}
+\newcommand{\docTypeFull}		{Учебная практика}
+\newcommand{\docType}			{УП}
+\newcommand{\internType}		{\docTypeFull}
+\newcommand{\internOrg}			{\schoolName}
+\newcommand{\schTutorPos}		{ст. преп.}
+\newcommand{\schTutorIOF}		{Д.Р. Хашев}
+\newcommand{\baseTutorPos}		{директор}
+\newcommand{\baseTutorIOF}		{П.В. Герасин}
+\newcommand{\devNameFull}		{Вундервафля кармическая}
+\newcommand{\devName}			{ВК}
+\newcommand{\developer}			{Иванов}
+\newcommand{\developerIOF}		{И. И. \developer}
+\newcommand{\developerFaImOt}	{\developer Иван Иванович}
+\newcommand{\developerYear}		{2}
+\newcommand{\developerGroup}	{ХР\developerYear1}
+\newcommand{\prover}			{}
+\newcommand{\nControl}			{Петров}
+\newcommand{\ytverd}			{Сидоров}
+
+% Башка титульника с полным названием и гербом ДГТУ
+\def\titleHead{
+	\includegraphics[width=16.4mm]{./graphics/img/DSTU-logo.png}
+
+	МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ
+
+	\textbf{\orgNameFull\\(ДГТУ)}
+
+	\vfill
+
+	\raggedright \schoolNameFull
+
+	\vfill
+	}
+
+% Табличка на титульник с директором и прочим дерьмом
+\newcommand{\topTable}{%
+	\raggedleft
+	\renewcommand{\arraystretch}{0}
+	\begin{tabular}{ccccp{4em}}
+		\strut Директор & \multicolumn{4}{c}{\strut ИОТ «Школа Икс»} \\
+							\cline{2-5}
+		\multicolumn{2}{c}{\hspace*{6em}} & \hfil & \multicolumn{2}{c}{\strut П.В. Герасин} \\
+		\cline{1-2} 						\cline{4-5}
+		\multicolumn{2}{c}{\scriptsize\strut  подпись} & & \multicolumn{2}{c}{\scriptsize\strut  И.О. Фамилия} \\
+	\end{tabular}\\
+	<<\underline{\makebox[10mm]{}}>> \underline{\makebox[35mm]{\finalMonth}} \finalYear г.
+	\vfill
+}
+
+\newcommand{\underlead}{\xleaders\hbox{\rule[-4pt]{1pt}{0.4pt}}\hfill}
+
+% Наиболее типичные поля ввода
+\newcommand*{\entery}[3]{%
+	{#1 \underlead\makebox[0pt]{#2}\underlead\mbox{}\\
+	\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut #3\hfill\mbox{}}%
+	}
+\newcommand*{\entxxx}[7]{{%
+#1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
+	\underlead\makebox[0pt]{#3}\underlead\mbox{}\quad%
+	\underlead\makebox[0pt]{#4}\underlead\mbox{}\\
+\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
+							\hfill 						\makebox[0pt]{#6}\hfill\quad
+							\hfill 						\makebox[0pt]{#7}\hfill\mbox{}%
+}}
+
+
+\def\internMain{
+\begin{titlepage}
+	\centering\small
+	\titleHead
+
+	\topTable
+
+	\centering
+	\textbf{ОТЧЁТ}
+
+	\entery{По}{\internType}{вид практики}
+
+	\entery{В}{\internOrg}%
+			{наименование базы практики}
+
+	\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+			{подпись}{дата}{И.О.Фамилия}
+
+	Обозначение отчёта \underlead\makebox[0pt]{\decim}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
+			{\scriptsize\strut\mbox{}
+
+	}\entery{Направление подготовки}{\facKey\ \facName}%
+			{код и наименования направления подготовки}
+
+	\entery{Направленность (профиль)}{\mbox{}}{\mbox{}}
+
+	{\raggedright Руководитель практики:
+
+	}\entxxx{от предприятия}{\baseTutorPos}{\mbox{}}{\baseTutorIOF}%
+			{должность}{подпись, дата}{И.О.Фамилия}
+
+			\raisebox{1.5ex}[0pt][0pt]{М.П.}
+			\vspace*{-3ex}
+
+	\entxxx{от \schoolName}{\schTutorPos}{\mbox{}}{\schTutorIOF}%
+			{должность}{подпись, дата}{И.О.Фамилия}
+
+	\entxxx{Оценка}{\mbox{}}{\mbox{}}{\mbox{}}%
+			{\mbox{}}{дата}{подпись преподавателя}
+
+	\vfill
+
+	Ростов-на-Дону \\
+	\finalYear
+
+	\pagebreak
+\end{titlepage}
+}
+
+\long\def\internTask#1{
+\begin{titlepage}
+	\centering\small
+	\titleHead
+
+	\centering
+	\textbf{ЗАДАНИЕ}
+
+	\entery{По}{\internType}{вид практики}
+
+	\entery{В}{\internOrg}%
+			{наименование базы практики}
+
+	\raggedright
+
+	В период с <<\startDay>> \startMonth\ \finalYear г. по \finalDate\\
+	{\scriptsize\strut\mbox{}
+
+	}\entery{Обучающийся}{\developerFaImOt}%
+			{Фамилия Имя Отчество полностью}
+
+	Обозначение отчёта \underlead\makebox[0pt]{\decim}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
+			{\scriptsize\strut\mbox{}
+
+	}Срок предоставления отчёта на кафедру \finalDate
+
+	\vfill
+
+	#1
+
+	\vfill
+
+	Руководитель практики от
+
+	\entxxx{\schoolName}{\mbox{}}{\finalDate}{\schTutorIOF}%
+			{подпись}{дата}{И.О.Фамилия}
+
+	\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+			{подпись}{дата}{И.О.Фамилия}
+
+	\pagebreak
+	\end{titlepage}
+}
+
+\long\def\internPlan#1{
+	\begin{titlepage}
+		\centering\small
+		\titleHead
+
+		\topTable
+
+		\centering\textbf{Рабочий график (план) проведения практики}
+
+		#1 % здесь должна быть таблица с планом практики из столбцов с
+			% номером, Мероприятием и Сроком выполнения.
+			% \begin{tabular}{|c|p{0.7\hsize}|c|}
+
+		\vfill
+
+		{\raggedright Руководитель практики:
+
+		}\entxxx{от предприятия}{\baseTutorPos}{\mbox{}}{\baseTutorIOF}%
+				{должность}{подпись, дата}{И.О.Фамилия}
+
+				\raisebox{1.5ex}[0pt][0pt]{М.П.}
+				\vspace*{-3ex}
+
+		\entxxx{от \schoolName}{\schTutorPos}{\mbox{}}{\schTutorIOF}%
+				{должность}{подпись, дата}{И.О.Фамилия}
+
+		\vfill
+
+		Ростов-на-Дону \\
+		\finalYear
+
+		\pagebreak
+	\end{titlepage}
+}
+
+\long\def\internDairy#1{
+	\begin{titlepage}
+		{\centering\textbf{ДНЕВНИК ПРОХОЖДЕНИЯ ПРАКТИКИ}
+
+		}{\footnotesize
+		В данном разделе ежедневно, кратко и четко записываются выполняемые работы, и в конце каждой недели журнал представляется для проверки руководителю (от предприятия и университета) практики. При выполнении одной и той же работы несколько дней, в графе «дата» сделать запись «с~\rule{1.5em}{0.4pt} по~\rule{1.5em}{0.4pt}».\\[2ex]
+
+		}\centering\small
+		#1 % здесь должна быть таблица со столбцами
+			% Дата, Место работы, Выполняемые работы, Оценка руководителя
+	\end{titlepage}
+}
+
+\def\comment{
+	\begin{titlepage}
+		\centering\textbf{ОТЗЫВ-ХАРАКТЕРИСТИКА}
+
+		{Обучающийся \underlead\makebox[0pt]{\developerFaImOt}\underlead\mbox{}\\
+		{\scriptsize\vspace*{-1ex}}\vspace*{-1ex}\hphantom{Обучающийся} \hfill \scriptsize\strut Фамилия Имя Отчество\hfill\mbox{}\vspace*{1ex}}
+
+		\vspace*{-2ex}{\raggedright\noindent\developerYear\ курса группы \developerGroup\ \schoolNameFull
+
+		}\entery{Вид практики}{\internType}{\mbox{}}
+
+		\vspace*{-2ex}\entery{Наименование базы практики}{\internOrg}%
+				{\mbox{}}
+
+		\vfill
+
+		\raggedright
+		Обучающийся выполнил задания программы практики\\
+		\strut\hrule
+		\strut\hrule
+		\strut\hrule
+		\strut\hrule
+		\strut\hrule
+		\strut
+
+		Обучающийся дополнительно ознакомился/изучил\\
+		\strut\hrule
+		\strut\hrule
+		\strut\hrule
+		\strut\hrule
+		\strut\hrule
+		\strut
+
+		{\centering Заслуживает оценки \underlead\mbox{}
+
+		}\vfill
+
+		\hfill \parbox{0.4\hsize}{
+			\noindent Руководитель практики от~предприятия\\
+			\makebox[\hsize]{\underlead\makebox[0pt]{\baseTutorIOF}\underlead}\\
+			<<\underline{\makebox[10mm]{}}>> \underline{\makebox[35mm]{\finalMonth}} \finalYear г.
+			{\centering М.П.
+
+			}
+		}
+	\end{titlepage}
+}

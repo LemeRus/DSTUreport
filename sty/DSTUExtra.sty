@@ -1,0 +1,253 @@
+% This package designed and commented in Russian (utf-8 encoding).
+% Этот пакет подключается к DSTUReport и дополняет его функционалом, которого не было в report
+
+% Используются:
+
+% hyperref    - перекрёстные ссылки активны
+% fontenc     - кодировка шрифтов - T2A
+% inputenc    - входная кодировка - задаётся параметром
+% babel       - настройки языков - русский и английский
+% microtype   - микротипографика, улучшает читаемость текста
+% geometry    - устанавливает размер полей
+% amssymb     - для русских "меньше или равно" "больше или равно"
+% amsmath     - для многоэтажных формул, систем уравнений и т.п.
+% icomma      - умная запятая в формулах, отличает разделитель от перечисления
+% float       - опции для размещения рисунков, таблиц
+% lastpage    - расчет количества тех или иных элементов в документе
+% longtable   - многостраничные таблицы, в том числе с переносом шапки
+% multirow    - вертикально объединять несколько ячеек в таблице
+% graphicx    - возможность указывать опции у includegraphics
+% caption     - оформление заголовков рисунков и таблиц
+% enumitem    - возможность менять лейблы перечислений на ходу
+% blindtext   - длинный текст для тестирования
+
+
+\ProvidesPackage{DSTUExtra}[2021/11/27 v1.00 Additional Functions and Packages for DSTUReport]
+\NeedsTeXFormat{LaTeX2e}
+
+% В report.cls кроличья нора не так глубока
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\@arabic\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\parindent}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+
+
+% Добавляем гипертекстовое оглавление в PDF
+\usepackage[
+bookmarks=true, colorlinks=true, unicode=true,
+urlcolor=black,linkcolor=black, anchorcolor=black,
+citecolor=black, menucolor=black, filecolor=black,
+]{hyperref}
+
+%% Что-то для шрифтов по ГОСТу, надо разбираться
+%\newcommand\Gost@Font@Warning[1]{#1 font(s) not found. Switching to default}
+%\newif\ifInvisibleDashes
+%\InvisibleDashesfalse
+
+
+%  перенос в словах-с-дефисом
+\lccode`\-=`\-
+\defaulthyphenchar=127
+
+\RequirePackage[T1, T2A]{fontenc}%
+\RequirePackage[utf8]{inputenc}%
+\RequirePackage[english,russian]{babel}%
+
+
+% GOST 7.32 p. 6.4.6 excluded letters ё, з, й, о, ч, ъ, ы, ь., переопределяем asbuk из бабеля
+\renewcommand{\asbuk}[1]{\expandafter\russian@realalph\csname c@#1\endcsname}
+\renewcommand{\Asbuk}[1]{\expandafter\russian@realAlph\csname c@#1\endcsname}
+\def\russian@realAlph#1{\ifcase#1\or
+   А\or Б\or В\or Г\or Д\or Е\or Ж\or
+   И\or К\or Л\or М\or Н\or
+   П\or Р\or С\or Т\or У\or Ф\or Х\or
+   Ц\or Ш\or Щ\or Э\or Ю\or Я\else\xpg@ill@value{#1}{russian@Alph}\fi}
+\def\russian@realalph#1{\ifcase#1\or
+   а\or б\or в\or г\or д\or е\or ж\or
+   и\or к\or л\or м\or н\or
+   п\or р\or с\or т\or у\or ф\or х\or
+   ц\or ш\or щ\or э\or ю\or я\else\xpg@ill@value{#1}{russian@alph}\fi}
+
+
+\RequirePackage{enumitem}
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{Я} % иначе asbuk ломается в перечислениях
+\AddEnumerateCounter{\asbuk}{\@asbuk}{я} %
+
+%  \InvisibleDashestrue
+%  \IfStrEq{\Gost@fonts}{times}{
+%   \IfFileExists{cyrtimes.sty}{
+%    \RequirePackage{cyrtimespatched}
+%	\InvisibleDashesfalse
+%   }{
+%    % apt-get install scalable-cyrfonts-tex
+%    \@latex@warning{\Gost@Font@Warning{Cyrtimes}}
+%   }}{}
+%  \IfStrEq{\Gost@fonts}{pscyr}{
+%   \IfFileExists{pscyr.sty}{
+%    \RequirePackage[math]{pscyr}
+%	\InvisibleDashesfalse
+%   }{
+%    \@latex@warning{\Gost@Font@Warning{Pscyr}}
+%   }}{}
+
+
+% Формулы
+\RequirePackage{amssymb} % для русских "меньше или равно" "больше или равно"
+\RequirePackage{amsmath} % для многоэтажных формул, систем уравнений и т.п.
+\RequirePackage{icomma}  % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+
+%% Убраны скобки вокруг  \arabic{equation} -- Крищенко В.
+%% В какой-то момент (после ams*?) стало появляться две пары скобок вокруг номеров формул.
+%%\renewcommand{\theequation}{\arabic{equation}}
+%\newlength\Gost@EqRemLen
+%\newlength\Gost@@EqRemLen
+%\newenvironment{eqrem}{%
+% \begin{tabular}{p{\Gost@@EqRemLen}p{\Gost@EqRemLen}}
+%  где
+%}{
+% \end{tabular}
+%}
+%% пояснения м.б. в виде
+%%  \begin{eqrem}
+%%   & X~--- неизвестная \\
+%%   & Y~--- ещё неизвестная \\
+%%  \end{eqrem}
+%
+%% ... допускается нумерация формул в пределах раздела
+%
+
+% Не используем, но интересно:
+%%Перенос формул по =+-
+%%\begingroup
+%%\catcode`\+\active\gdef+{\mathchar8235\nobreak\discretionary{}%
+%% {\usefont{OT1}{cmr}{m}{n}\char43}{}}
+%%\catcode`\-\active\gdef-{\mathchar8704\nobreak\discretionary{}%
+%% {\usefont{OMS}{cmsy}{m}{n}\char0}{}}
+%%\catcode`\=\active\gdef={\mathchar12349\nobreak\discretionary{}%
+%% {\usefont{OT1}{cmr}{m}{n}\char61}{}}
+%%\endgroup
+%%\def\cdot{\mathchar8705\nobreak\discretionary{}%
+%% {\usefont{OMS}{cmsу}{m}{n}\char1}{}}
+%%\def\times{\mathchar8706\nobreak\discretionary{}%
+%% {\usefont{OMS}{cmsy}{m}{n}\char2}{}}
+%%\mathcode`\==32768
+%%\mathcode`\+=32768
+%%\mathcode`\-=32768
+%
+
+
+% Иллюстрации
+\RequirePackage{graphicx}   % Пакет для включения рисунков
+
+% Подпись по умолчанию слева (для таблиц, листингов и т.п.)
+\RequirePackage[normal,nooneline]{caption}
+% Длинное тире в качестве разделителя
+\DeclareCaptionLabelSeparator*{emdash}{\space\cdash---\space}
+% Между подписью и рисунком 10pt
+\captionsetup{labelsep=emdash,aboveskip=10pt,belowskip=0pt,position=bottom}
+% У рисунков выравнивание по центру
+\captionsetup[figure]{justification=centering}
+% У таблиц -- слева, зазор 5pt вместо 10
+\captionsetup[table]{position=top,aboveskip=5pt,justification=justified}
+%  Подпись к рисунку
+\DeclareCaptionLabelFormat{figure}{Рисунок #2}
+\captionsetup[figure]{labelformat=figure}
+
+
+% Таблицы
+\RequirePackage{longtable} % многостраничные таблицы
+\LTleft=\z@
+\LTright=\fill
+%\newcommand*\subcaption[1]{ % Заголовок без "Таблица..." -- для заголовков на других стр.
+%    \multicolumn{\LT@cols}{p{1\textwidth}}{#1}
+%}
+
+\RequirePackage{multirow} % вертикально объединять несколько ячеек в таблице
+
+\RequirePackage{float}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%    КОНЕЦ ВСТАВКИ С ПАКТАМИ  %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{lastpage}                   % Пакет для подсчета общего числа страни
+\newcounter{totfigures}
+\newcounter{tottables}
+\newcounter{totappendices}
+%\newcounter{totbiblio}
+
+\setcounter{totfigures}{0}
+\setcounter{tottables}{0}
+\setcounter{totappendices}{0}
+%\setcounter{totbiblio}{0}
+
+
+\providecommand\totfig{\number\value{totfigures}}%
+\providecommand\tottab{\number\value{tottables}}%
+\providecommand\totapp{\number\value{totappendices}}%
+%\providecommand\totbib{\number\value{totbiblio}}%
+
+\newif\ifDSTU@HaveAppendices
+\DSTU@HaveAppendicesfalse
+
+\AtEndDocument{%
+  \addtocounter{totfigures}{\value{figure}}%
+  \addtocounter{tottables}{\value{table}}%
+  \ifDSTU@HaveAppendices%
+  \addtocounter{totappendices}{\value{chapter}}%
+  \fi%
+%  \addtocounter{totbiblio}{\value{biblio}}%
+  \immediate\write\@mainaux{%
+    \string\gdef\string\totfig{\number\value{totfigures}}%
+    \string\gdef\string\tottab{\number\value{tottables}}%
+    \string\gdef\string\totapp{\number\value{totappendices}}%
+%    \string\gdef\string\totbib{\number\value{totbiblio}}%
+  }%
+}
+
+\addto\captionsrussian{%
+ \def\contentsname{%
+  Содержание}% по ГОСТ 2.105 элемент называется Содержание
+% \def\bibname{%  % Кто-то ниже (addbibresource?) перетерает bibname
+%  Список~
+%  использованных~
+%  источниковBlaBLa}%
+}
+
+% Вставлять ли лист регистрации изменений
+\newif\ifDSTUHaveLRI
+\DSTUHaveLRIfalse
+
+% Использовать ли ЛУ
+\newif\ifDSTUHaveLY
+\DSTUHaveLYfalse
+
+% Использовать ли рамку по ЕСКД
+\newif\ifDSTUHaveESKDFrame
+\DSTUHaveESKDFramefalse
+
+\newcommand*{\No}{\textnumero}  % значок номера для поддержки старых текстов
+\usepackage{gensymb}            % для значка градуса цельсия
+\usepackage{textcomp}           % нужен gensymb для \micro, иначе лишние ворнинги
+
+\RequirePackage[right=15mm,top=20mm,bottom=20mm,left=30mm,headsep=0pt,includefoot]{geometry}
+
+\RequirePackage{blindtext}
+
+\RequirePackage{microtype}% полезный пакет для микротипографии, увы под xelatex мало чего умеет, но под pdflatex хорошо улучшает читаемость
+
+% Листинги и их настройки
+\include{listings.inc}
+
+\endinput
+
+
+
+
