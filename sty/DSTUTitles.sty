@@ -5,43 +5,50 @@
 % Используется совместно с классом DSTUReport и расширением DSTUExtra
 
 % Сокращения различных названий
-% !!! Изменять в преамбуле !!!
+% !!!
+% Изменять в преамбуле
+% !!!
+% скорее всего придётся изменять каждый раз при написании отчёта
 \newcommand{\startDay}			{03}
 \newcommand{\startMonth}		{июня}
 \newcommand{\startYear}			{2024}
 \newcommand{\finalDay}			{03}
 \newcommand{\finalMonth}		{июля}
 \newcommand{\finalYear}			{2024}
-\newcommand{\finalDate}			{<<\finalDay>> \finalMonth\ \finalYear г.}
+\newcommand{\docTypeFull}		{Пояснительная записка}
+\newcommand{\docType}			{ПЗ}
+\newcommand{\cwModule}			{Цифровая инфраструктура} % курсовая по предмету <-
+\newcommand{\internType}		{Учебная практика}
+\newcommand{\internOrg}			{\schoolName}
+\newcommand{\schTutorPos}		{ст. преп.}		% рук-ль от факультета (школы)
+\newcommand{\schTutorIOF}		{Д.Р. Хашев}	% для отчёта и курсовой
+\newcommand{\baseTutorPos}		{директор}		% рук-ль от предприятия
+\newcommand{\baseTutorIOF}		{П.В. Герасин}	% только для отчёта
+\newcommand{\devNameFull}		{Вундервафля кармическая} % тема проекта или название продукта
+								% используется в рамках и на титульнике курсовой
+\newcommand{\devName}			{ВК}
+\newcommand{\nControl}			{Петров}
+\newcommand{\ytverd}			{Сидоров}
+\newcommand{\developerYear}		{2} % здесь указать курс. Повлияет на группу.
+
+% это надо настроить один раз под себя
+\newcommand{\developer}			{Иванов}
+\newcommand{\developerIOF}		{И. И. \developer}
+\newcommand{\developerFaImOt}	{\developer\ Иван Иванович}
+\newcommand{\facKey}			{15.03.06}
+\newcommand{\facName}			{Мехатроника и робототехника}
+\newcommand{\decim}				{\facKey.930000.000} % 93 -- последние цифры зачётки
 \newcommand{\schoolNameFull}	{Институт опережающих технологий <<Школа Икс>>}
-\newcommand{\schoolName}		{ДГТУ ИОТ <<Школа Икс>>}
+\newcommand{\schoolName}		{ИОТ <<Школа Икс>>}
+
+% возможно вам не надо это изменять
 \newcommand{\orgNameFull}		{
 	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ
 	ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ
 	«ДОНСКОЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ»
 	}
 \newcommand{\orgName}			{ФГБОУ ВО <<ДГТУ>>}
-\newcommand{\facKey}			{15.03.06}
-\newcommand{\facName}			{Мехатроника и робототехника}
-\newcommand{\decim}				{\facKey.930000.000}
-\newcommand{\docTypeFull}		{Учебная практика}
-\newcommand{\docType}			{УП}
-\newcommand{\internType}		{\docTypeFull}
-\newcommand{\internOrg}			{\schoolName}
-\newcommand{\schTutorPos}		{ст. преп.}
-\newcommand{\schTutorIOF}		{Д.Р. Хашев}
-\newcommand{\baseTutorPos}		{директор}
-\newcommand{\baseTutorIOF}		{П.В. Герасин}
-\newcommand{\devNameFull}		{Вундервафля кармическая}
-\newcommand{\devName}			{ВК}
-\newcommand{\developer}			{Иванов}
-\newcommand{\developerIOF}		{И. И. \developer}
-\newcommand{\developerFaImOt}	{\developer Иван Иванович}
-\newcommand{\developerYear}		{2}
-\newcommand{\developerGroup}	{ХР\developerYear1}
-\newcommand{\prover}			{}
-\newcommand{\nControl}			{Петров}
-\newcommand{\ytverd}			{Сидоров}
+\newcommand{\finalDate}			{<<\finalDay>> \finalMonth\ \finalYear г.}
 
 % Башка титульника с полным названием и гербом ДГТУ
 \def\titleHead{
@@ -56,7 +63,7 @@
 	\raggedright \schoolNameFull
 
 	\vfill
-	}
+}
 
 % Табличка на титульник с директором и прочим дерьмом
 \newcommand{\topTable}{%
@@ -73,113 +80,192 @@
 	\vfill
 }
 
-\newcommand{\underlead}{\xleaders\hbox{\rule[-4pt]{1pt}{0.4pt}}\hfill}
+\newcommand{\underlead}{\xleaders\hbox{\rule[-4pt]{1pt}{0.4pt}}\hfill} % чуть опущенный вариант hrulefill, надо доработать, чтоб опускался ровно на глубину строки (сейчас опущен всегда на 4pt)
 
 % Наиболее типичные поля ввода
-\newcommand*{\entery}[3]{%
+\newcommand*{\entery}[3]{% \entery{название поля}{содержимое поля}{подпись внизу}
 	{#1 \underlead\makebox[0pt]{#2}\underlead\mbox{}\\
 	\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut #3\hfill\mbox{}}%
-	}
-\newcommand*{\entxxx}[7]{{%
-#1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
+}
+\newcommand*{\entxxx}[7]{{% то же самое, только 3 пары содержимое-подпись
+ #1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
 	\underlead\makebox[0pt]{#3}\underlead\mbox{}\quad%
 	\underlead\makebox[0pt]{#4}\underlead\mbox{}\\
-\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
-							\hfill 						\makebox[0pt]{#6}\hfill\quad
-							\hfill 						\makebox[0pt]{#7}\hfill\mbox{}%
+ \vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
+							 \hfill 					\makebox[0pt]{#6}\hfill\quad
+							 \hfill 					\makebox[0pt]{#7}\hfill\mbox{}%
 }}
 
 
+\def\cwMain{
+	\begin{titlepage}
+		\centering\small
+		\titleHead
+
+		\topTable
+
+		\centering
+		\textbf{КУРСОВОЙ ПРОЕКТ}
+		
+		\entery{Тема:}{\devNameFull}{\mbox{}}
+
+		\entery{Дисциплина (модуль)}{\cwModule}%
+				{наименование учебной дисциплины (модуля)}
+
+		\entery{Направление подготовки}{\facKey\ \facName}%
+				{код и наименования направления подготовки}
+
+		\entery{Направленность (профиль)}{\mbox{}}{\mbox{}}
+
+		Обозначение курсового проекта \underlead\makebox[0pt]{\decim}\underlead
+								Группа \underline{\makebox[5em]{\developerGroup}}\\
+				{\scriptsize\strut\mbox{}
+
+		}\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+				{подпись}{дата}{И.О.Фамилия}
+
+		\entery{Курсовой проект защищен с оценкой}{\mbox{}}{\mbox{}}
+
+		\entxxx{Руководитель проекта}{\mbox{}}{\schTutorPos}{\schTutorIOF}%
+				{подпись, дата}{должность}{И.О.Фамилия}
+
+		\vfill
+
+		Ростов-на-Дону \\
+		\finalYear
+
+		\pagebreak
+	\end{titlepage}
+}
+
+\long\def\cwTask#1{
+	\begin{titlepage}
+		\centering\small
+		\titleHead
+
+		\centering
+		\textbf{ЗАДАНИЕ}\\
+		на выполнение курсового проекта
+
+		\entery{Тема:}{\devNameFull}{\mbox{}}
+		
+		\entery{Дисциплина (модуль)}{\cwModule}%
+				{наименование учебной дисциплины (модуля)}
+		
+		\entery{Обучающийся}{\developerFaImOt}%
+				{Фамилия Имя Отчество полностью}
+		
+		Обозначение курсового проекта \underlead\makebox[0pt]{\decim}\underlead
+		Группа \underline{\makebox[5em]{\developerGroup}}\\
+				{\scriptsize\strut\mbox{}
+
+		}\vfill
+
+		\raggedright
+		#1 % данный аргумент -- простой текст с заданием в соответствующем
+
+		\vfill
+
+		\entxxx{Руководитель проекта}{\mbox{}}{\schTutorPos}{\schTutorIOF}%
+				{подпись, дата}{должность}{И.О.Фамилия}
+
+		\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+				{подпись}{дата}{И.О.Фамилия}
+
+		\pagebreak
+	\end{titlepage}
+}
+
 \def\internMain{
-\begin{titlepage}
-	\centering\small
-	\titleHead
+	\begin{titlepage}
+		\centering\small
+		\titleHead
 
-	\topTable
+		\topTable
 
-	\centering
-	\textbf{ОТЧЁТ}
+		\centering
+		\textbf{ОТЧЁТ}
 
-	\entery{По}{\internType}{вид практики}
+		\entery{По}{\internType}{вид практики}
 
-	\entery{В}{\internOrg}%
-			{наименование базы практики}
+		\entery{В}{\internOrg}%
+				{наименование базы практики}
 
-	\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
-			{подпись}{дата}{И.О.Фамилия}
+		\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+				{подпись}{дата}{И.О.Фамилия}
 
-	Обозначение отчёта \underlead\makebox[0pt]{\decim}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
-			{\scriptsize\strut\mbox{}
+		Обозначение отчёта \underlead\makebox[0pt]{\decim}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
+				{\scriptsize\strut\mbox{}
 
-	}\entery{Направление подготовки}{\facKey\ \facName}%
-			{код и наименования направления подготовки}
+		}\entery{Направление подготовки}{\facKey\ \facName}%
+				{код и наименования направления подготовки}
 
-	\entery{Направленность (профиль)}{\mbox{}}{\mbox{}}
+		\entery{Направленность (профиль)}{\mbox{}}{\mbox{}}
 
-	{\raggedright Руководитель практики:
+		{\raggedright Руководитель практики:
 
-	}\entxxx{от предприятия}{\baseTutorPos}{\mbox{}}{\baseTutorIOF}%
-			{должность}{подпись, дата}{И.О.Фамилия}
+		}\entxxx{от предприятия}{\baseTutorPos}{\mbox{}}{\baseTutorIOF}%
+				{должность}{подпись, дата}{И.О.Фамилия}
 
-			\raisebox{1.5ex}[0pt][0pt]{М.П.}
-			\vspace*{-3ex}
+				\raisebox{1.5ex}[0pt][0pt]{М.П.}
+				\vspace*{-3ex}
 
-	\entxxx{от \schoolName}{\schTutorPos}{\mbox{}}{\schTutorIOF}%
-			{должность}{подпись, дата}{И.О.Фамилия}
+		\entxxx{от \schoolName}{\schTutorPos}{\mbox{}}{\schTutorIOF}%
+				{должность}{подпись, дата}{И.О.Фамилия}
 
-	\entxxx{Оценка}{\mbox{}}{\mbox{}}{\mbox{}}%
-			{\mbox{}}{дата}{подпись преподавателя}
+		\entxxx{Оценка}{\mbox{}}{\mbox{}}{\mbox{}}%
+				{\mbox{}}{дата}{подпись преподавателя}
 
-	\vfill
+		\vfill
 
-	Ростов-на-Дону \\
-	\finalYear
+		Ростов-на-Дону \\
+		\finalYear
 
-	\pagebreak
-\end{titlepage}
+		\pagebreak
+	\end{titlepage}
 }
 
 \long\def\internTask#1{
-\begin{titlepage}
-	\centering\small
-	\titleHead
+	\begin{titlepage}
+		\centering\small
+		\titleHead
 
-	\centering
-	\textbf{ЗАДАНИЕ}
+		\centering
+		\textbf{ЗАДАНИЕ}
 
-	\entery{По}{\internType}{вид практики}
+		\entery{По}{\internType}{вид практики}
 
-	\entery{В}{\internOrg}%
-			{наименование базы практики}
+		\entery{В}{\internOrg}%
+				{наименование базы практики}
 
-	\raggedright
+		\raggedright
 
-	В период с <<\startDay>> \startMonth\ \finalYear г. по \finalDate\\
-	{\scriptsize\strut\mbox{}
+		В период с <<\startDay>> \startMonth\ \finalYear г. по \finalDate\\
+		{\scriptsize\strut\mbox{}
 
-	}\entery{Обучающийся}{\developerFaImOt}%
-			{Фамилия Имя Отчество полностью}
+		}\entery{Обучающийся}{\developerFaImOt}%
+				{Фамилия Имя Отчество полностью}
 
-	Обозначение отчёта \underlead\makebox[0pt]{\decim}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
-			{\scriptsize\strut\mbox{}
+		Обозначение отчёта \underlead\makebox[0pt]{\decim}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
+				{\scriptsize\strut\mbox{}
 
-	}Срок предоставления отчёта на кафедру \finalDate
+		}Срок предоставления отчёта на кафедру \finalDate
 
-	\vfill
+		\vfill
 
-	#1
+		#1
 
-	\vfill
+		\vfill
 
-	Руководитель практики от
+		Руководитель практики от
 
-	\entxxx{\schoolName}{\mbox{}}{\finalDate}{\schTutorIOF}%
-			{подпись}{дата}{И.О.Фамилия}
+		\entxxx{\schoolName}{\mbox{}}{\finalDate}{\schTutorIOF}%
+				{подпись}{дата}{И.О.Фамилия}
 
-	\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
-			{подпись}{дата}{И.О.Фамилия}
+		\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+				{подпись}{дата}{И.О.Фамилия}
 
-	\pagebreak
+		\pagebreak
 	\end{titlepage}
 }
 
@@ -194,7 +280,7 @@
 
 		#1 % здесь должна быть таблица с планом практики из столбцов с
 			% номером, Мероприятием и Сроком выполнения.
-			% \begin{tabular}{|c|p{0.7\hsize}|c|}
+			% шапка таблицы: \begin{tabular}{|c|p{0.7\hsize}|c|}
 
 		\vfill
 
@@ -228,6 +314,7 @@
 		}\centering\small
 		#1 % здесь должна быть таблица со столбцами
 			% Дата, Место работы, Выполняемые работы, Оценка руководителя
+			% \begin{tabular}{|p{0.12\hsize}|p{0.2\hsize}|p{0.3\hsize}|p{0.25\hsize}|}
 	\end{titlepage}
 }
 
