@@ -12,19 +12,7 @@
 %%%%%%%%%%%%%%%%%%
 %Latex 2012 and up
 
-\newcommand\orgNameFull  {Институт опережающих технологий <<Школа Икс>>}
-\newcommand\orgName      {ФГБОУ ВО <<НИУ «МЭИ>>}
-\newcommand\decim        {МИФТ.469429.113}
-\newcommand\docTypeFull  {Формуляр}
-\newcommand\docType      {ФО}
-\newcommand\devNameFull  {Вундервафля кармическая}
-\newcommand\devName      {ВК}
-\newcommand\razrab       {Иванов}
-\newcommand\razrabIOF    {И. И. \razrab}
-\newcommand\razrabFaImOt {\razrab Иван Иванович}
-\newcommand\prover       {}
-\newcommand\nControl     {Петров}
-\newcommand\ytverd       {Сидоров}
+% Здесь были объявлены переменные, которые теперь перенесены в DSTUTitles
 
 
 \DSTUHaveLYtrue           % Использовать ли ЛУ
@@ -50,10 +38,11 @@
 
 % РАМКИ
 
-\textwidth=175mm
-\textheight=260mm
+\textwidth=165mm
+\textheight=255mm
 \oddsidemargin=-.4mm
-\headsep=5mm
+\leftskip=7mm
+\headsep=10mm
 
 \topmargin=-1in
 \unitlength=1mm
@@ -101,10 +90,10 @@
                                               {\normalsize \docTypeFull}%
                                \end{center} \end{minipage}}
 
-\put(0, 0){\makebox(17,5)[l]{\ Утв.}}       \put(17,  0){\makebox(23,5)[l]{\ \ytverd}}
+\put(0, 0){\makebox(17,5)[l]{\ Утв.}}       \put(17,  0){\makebox(23,5)[l]{\ \baseTutorIOF}}
 \put(0, 5){\makebox(17,5)[l]{\ Н.контр.}}   \put(17,  5){\makebox(17,5)[l]{\ \nControl}}
-\put(0, 15){\makebox(17,5)[l]{\ Пров.}}     \put(17, 15){\makebox(17,5)[l]{\ \prover}}
-\put(0, 20){\makebox(17,5)[l]{\ Разраб.}}   \put(17, 20){\makebox(17,5)[l]{\ \razrab}}
+\put(0, 15){\makebox(17,5)[l]{\ Пров.}}     \put(17, 15){\makebox(17,5)[l]{\ \schTutorIOF}}
+\put(0, 20){\makebox(17,5)[l]{\ Разраб.}}   \put(17, 20){\makebox(17,5)[l]{\ \developer}}
 
 \put(0, 40){\line(1,0){185}}
 \put(0, 25){\line(1,0){185}}
