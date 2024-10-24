@@ -5,50 +5,48 @@
 % Используется совместно с классом DSTUReport и расширением DSTUExtra
 
 % Сокращения различных названий
-% !!!
-% Изменять в преамбуле
-% !!!
-% скорее всего придётся изменять каждый раз при написании отчёта
+% !!! Изменять в преамбуле !!!
+% Скорее всего преамбула называется "00-preamble.tex"
+
+% Даты начала и конца работы
 \newcommand{\startDay}			{03}
 \newcommand{\startMonth}		{июня}
 \newcommand{\startYear}			{2024}
 \newcommand{\finalDay}			{03}
 \newcommand{\finalMonth}		{июля}
 \newcommand{\finalYear}			{2024}
-\newcommand{\docTypeFull}		{Пояснительная записка}
-\newcommand{\docType}			{ПЗ}
-\newcommand{\cwModule}			{Цифровая инфраструктура} % курсовая по предмету <-
-\newcommand{\internType}		{Учебная практика}
-\newcommand{\internOrg}			{\schoolName}
-\newcommand{\schTutorPos}		{ст. преп.}		% рук-ль от факультета (школы)
-\newcommand{\schTutorIOF}		{Д.Р. Хашев}	% для отчёта и курсовой
-\newcommand{\baseTutorPos}		{директор}		% рук-ль от предприятия
-\newcommand{\baseTutorIOF}		{П.В. Герасин}	% только для отчёта
-\newcommand{\devNameFull}		{Вундервафля кармическая} % тема проекта или название продукта
-								% используется в рамках и на титульнике курсовой
-\newcommand{\devName}			{ВК}
-\newcommand{\nControl}			{Петров}
-\newcommand{\ytverd}			{Сидоров}
-\newcommand{\developerYear}		{2} % здесь указать курс. Повлияет на группу.
-
-% это надо настроить один раз под себя
-\newcommand{\developer}			{Иванов}
-\newcommand{\developerIOF}		{И. И. \developer}
-\newcommand{\developerFaImOt}	{\developer\ Иван Иванович}
-\newcommand{\facKey}			{15.03.06}
-\newcommand{\facName}			{Мехатроника и робототехника}
-\newcommand{\decim}				{\facKey.930000.000} % 93 -- последние цифры зачётки
+\newcommand{\finalDate}			{<<\finalDay>> \finalMonth\ \finalYear г.}
+% Сокращения официальных названий
 \newcommand{\schoolNameFull}	{Институт опережающих технологий <<Школа Икс>>}
-\newcommand{\schoolName}		{ИОТ <<Школа Икс>>}
-
-% возможно вам не надо это изменять
+\newcommand{\schoolName}		{ДГТУ ИОТ <<Школа Икс>>}
 \newcommand{\orgNameFull}		{
 	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ
 	ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ
 	«ДОНСКОЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ»
 	}
 \newcommand{\orgName}			{ФГБОУ ВО <<ДГТУ>>}
-\newcommand{\finalDate}			{<<\finalDay>> \finalMonth\ \finalYear г.}
+% Личная информация
+\newcommand{\facKey}			{15.03.06} % номер направления подготовки
+\newcommand{\facName}			{Мехатроника и робототехника} % название направления подготовки
+\newcommand{\decim}				{\facKey.930000.000} % Для рамок, поищи в DSTUEskd.sty
+\newcommand{\developer}			{Иванов}
+\newcommand{\developerIOF}		{И. И. \developer}
+\newcommand{\developerFaImOt}	{\developer Иван Иванович}
+\newcommand{\developerYear}		{2} % курс обучения (скорее всего ты его будешь менять чаще всего ;)
+\newcommand{\developerGroup}	{ХР\developerYear}
+% Названия конкретного документа
+\newcommand{\docTypeFull}		{Пояснительная записка} % Тип документа (тоже в DSTUEskd.sty ищи)
+\newcommand{\docType}			{УП}
+\newcommand{\module}			{Учебная практика} % Вид практики или название дисциплины курсача
+\newcommand{\internOrg}			{\schoolName} % Название предприятия практики
+\newcommand{\devNameFull}		{Вундервафля кармическая} % Название темы для курсача
+\newcommand{\devName}			{ВК} % наверное только для рамок
+% И преподы
+\newcommand{\schTutorPos}		{ст. преп.} % От уника чел для практики или владелец
+\newcommand{\schTutorIOF}		{Д.Р. Хашев}%  модуля / наставник для курсача и рамок
+\newcommand{\baseTutorPos}		{директор} % От предприятия чел для практики
+\newcommand{\baseTutorIOF}		{П.В. Герасин} % или утвердивший для курсача (директор или ректор)
+\newcommand{\nControl}			{Петров} % смотри в файле с рамками, мож и надо...
 
 % Башка титульника с полным названием и гербом ДГТУ
 \def\titleHead{
@@ -63,7 +61,7 @@
 	\raggedright \schoolNameFull
 
 	\vfill
-}
+	}
 
 % Табличка на титульник с директором и прочим дерьмом
 \newcommand{\topTable}{%
@@ -80,46 +78,47 @@
 	\vfill
 }
 
-\newcommand{\underlead}{\xleaders\hbox{\rule[-4pt]{1pt}{0.4pt}}\hfill} % чуть опущенный вариант hrulefill, надо доработать, чтоб опускался ровно на глубину строки (сейчас опущен всегда на 4pt)
+\newcommand{\underlead}{\xleaders\hbox{\rule[-4pt]{1pt}{0.4pt}}\hfill}
 
 % Наиболее типичные поля ввода
-\newcommand*{\entery}[3]{% \entery{название поля}{содержимое поля}{подпись внизу}
+\newcommand*{\entery}[3]{%
 	{#1 \underlead\makebox[0pt]{#2}\underlead\mbox{}\\
 	\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut #3\hfill\mbox{}}%
-}
-\newcommand*{\entxxx}[7]{{% то же самое, только 3 пары содержимое-подпись
- #1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
+	}
+\newcommand*{\entxxx}[7]{{%
+#1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
 	\underlead\makebox[0pt]{#3}\underlead\mbox{}\quad%
 	\underlead\makebox[0pt]{#4}\underlead\mbox{}\\
- \vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
-							 \hfill 					\makebox[0pt]{#6}\hfill\quad
-							 \hfill 					\makebox[0pt]{#7}\hfill\mbox{}%
+\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
+							\hfill 						\makebox[0pt]{#6}\hfill\quad
+							\hfill 						\makebox[0pt]{#7}\hfill\mbox{}%
 }}
 
 
-\def\cwMain{
+\def\courseWorkMain{
 	\begin{titlepage}
 		\centering\small
 		\titleHead
 
 		\topTable
 
+		\vfill
+
 		\centering
 		\textbf{КУРСОВОЙ ПРОЕКТ}
-		
+
 		\entery{Тема:}{\devNameFull}{\mbox{}}
 
-		\entery{Дисциплина (модуль)}{\cwModule}%
+		\entery{Дисциплина (модуль)}{\module}%
 				{наименование учебной дисциплины (модуля)}
 
-		\entery{Направление подготовки}{\facKey\ \facName}%
-				{код и наименования направления подготовки}
+		\entery{Обучающийся}{\developerFaImOt}%
+				{Фамилия Имя Отчество полностью}
 
 		\entery{Направленность (профиль)}{\mbox{}}{\mbox{}}
 
-		Обозначение курсового проекта \underlead\makebox[0pt]{\decim}\underlead
-								Группа \underline{\makebox[5em]{\developerGroup}}\\
-				{\scriptsize\strut\mbox{}
+		Обозначение курсового проекта \underlead\mbox{}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
+			{\scriptsize\strut\mbox{}
 
 		}\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
 				{подпись}{дата}{И.О.Фамилия}
@@ -138,31 +137,32 @@
 	\end{titlepage}
 }
 
-\long\def\cwTask#1{
+\long\def\courseWorkTask#1{
 	\begin{titlepage}
 		\centering\small
 		\titleHead
 
 		\centering
-		\textbf{ЗАДАНИЕ}\\
+		\textbf{ЗАДАНИЕ}
+
 		на выполнение курсового проекта
 
 		\entery{Тема:}{\devNameFull}{\mbox{}}
-		
-		\entery{Дисциплина (модуль)}{\cwModule}%
+
+		\entery{Дисциплина (модуль)}{\module}%
 				{наименование учебной дисциплины (модуля)}
-		
+
 		\entery{Обучающийся}{\developerFaImOt}%
 				{Фамилия Имя Отчество полностью}
-		
-		Обозначение курсового проекта \underlead\makebox[0pt]{\decim}\underlead
-		Группа \underline{\makebox[5em]{\developerGroup}}\\
-				{\scriptsize\strut\mbox{}
 
-		}\vfill
+		Обозначение курсового проекта \underlead\mbox{}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
+			{\scriptsize\strut\mbox{}
 
-		\raggedright
-		#1 % данный аргумент -- простой текст с заданием в соответствующем
+		}\raggedright
+
+		\vfill
+
+		#1
 
 		\vfill
 
@@ -171,8 +171,6 @@
 
 		\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
 				{подпись}{дата}{И.О.Фамилия}
-
-		\pagebreak
 	\end{titlepage}
 }
 
@@ -186,7 +184,7 @@
 		\centering
 		\textbf{ОТЧЁТ}
 
-		\entery{По}{\internType}{вид практики}
+		\entery{По}{\module}{вид практики}
 
 		\entery{В}{\internOrg}%
 				{наименование базы практики}
@@ -233,7 +231,7 @@
 		\centering
 		\textbf{ЗАДАНИЕ}
 
-		\entery{По}{\internType}{вид практики}
+		\entery{По}{\module}{вид практики}
 
 		\entery{В}{\internOrg}%
 				{наименование базы практики}
@@ -280,7 +278,7 @@
 
 		#1 % здесь должна быть таблица с планом практики из столбцов с
 			% номером, Мероприятием и Сроком выполнения.
-			% шапка таблицы: \begin{tabular}{|c|p{0.7\hsize}|c|}
+			% \begin{tabular}{|c|p{0.7\hsize}|c|}
 
 		\vfill
 
@@ -314,7 +312,6 @@
 		}\centering\small
 		#1 % здесь должна быть таблица со столбцами
 			% Дата, Место работы, Выполняемые работы, Оценка руководителя
-			% \begin{tabular}{|p{0.12\hsize}|p{0.2\hsize}|p{0.3\hsize}|p{0.25\hsize}|}
 	\end{titlepage}
 }
 
@@ -327,7 +324,7 @@
 
 		\vspace*{-2ex}{\raggedright\noindent\developerYear\ курса группы \developerGroup\ \schoolNameFull
 
-		}\entery{Вид практики}{\internType}{\mbox{}}
+		}\entery{Вид практики}{\module}{\mbox{}}
 
 		\vspace*{-2ex}\entery{Наименование базы практики}{\internOrg}%
 				{\mbox{}}
