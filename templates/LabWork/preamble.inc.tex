@@ -1,0 +1,52 @@
+\sloppy
+
+% Даты начала и конца работы
+\renewcommand{\startDay}			{0}
+\renewcommand{\startMonth}			{декабря}
+\renewcommand{\startYear}			{2024}
+\renewcommand{\finalDay}			{20}
+\renewcommand{\finalMonth}  		{декабря}
+\renewcommand{\finalYear}			{2024}
+\renewcommand{\finalDate}			{<<\finalDay>> \finalMonth\ \finalYear г.}
+% Сокращения официальных названий
+\renewcommand{\schoolNameFull}		{Институт опережающих технологий <<Школа Икс>>}
+\renewcommand{\schoolName}			{ДГТУ ИОТ <<Школа Икс>>}
+\renewcommand{\orgNameFull}			{
+	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ
+	ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ
+	«ДОНСКОЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ»
+	}
+\renewcommand{\orgName}				{ФГБОУ ВО <<ДГТУ>>}
+% Личная информация
+\renewcommand{\facKey}				{15.03.06} % номер направления подготовки
+\renewcommand{\facName}				{Мехатроника и робототехника} % название направления подготовки
+\renewcommand{\decim}				{\facKey.930000.000} % Для рамок, поищи в DSTUEskd.sty
+\renewcommand{\developer}			{Лемешкин}
+\renewcommand{\developerIOF}		{Р. А. \developer}
+\renewcommand{\developerFaImOt}		{\developer Руслан Андреевич}
+\renewcommand{\developerYear}		{3} % курс обучения (скорее всего ты его будешь менять чаще всего ;)
+\renewcommand{\developerGroup}		{ХР\developerYear}
+% Названия конкретного документа
+\renewcommand{\docTypeFull}			{Отчёт по ЛР} % Тип документа (тоже в DSTUEskd.sty ищи)
+\renewcommand{\docType}				{ЛР}
+\renewcommand{\module}				{Информационные устройства роботов и РТС} % Вид практики или название дисциплины курсача
+\renewcommand{\internOrg}			{\schoolName} % Название предприятия практики
+\renewcommand{\devNameFull}			{\module} % Название темы для курсача
+\renewcommand{\devName}				{УД} % наверное только для рамок
+% И преподы
+\renewcommand{\schTutorPos}			{к.т.н., доц.} % От уника чел для практики или владелец
+\renewcommand{\schTutorIOF}			{А.Ю. Зайцев}%  модуля / наставник для курсача и рамок
+\renewcommand{\baseTutorPos}		{директор} % От предприятия чел для практики
+\renewcommand{\baseTutorIOF}		{П.В. Герасин} % или утвердивший для курсача (директор или ректор)
+\renewcommand{\nControl}			{} % смотри в файле с рамками, мож и надо...
+
+\DSTUHaveLRIfalse		 % Вставить лист регистрации изменений
+\DSTUHaveLYfalse		% Вставить лист утверждения
+\DSTUHaveESKDFrametrue   % Использовать рамку
+
+\usepackage{pdflscape}
+% \usepackage{lscape}
+
+%\makeatletter
+%\newcommand{\keepwithnext}{\@beginparpenalty 10000}
+%\makeatother
