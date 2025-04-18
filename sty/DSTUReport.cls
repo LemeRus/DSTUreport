@@ -23,7 +23,7 @@
 % Автор - Илья Корогодин
 % Адаптировал под стандарты ДГТУ и дополнил Руслан Лемеров
 %
-% Создан путем модификации report.cls из /usr/share/texlive/texmf-dist/tex/latex/base/report.cls 
+% Создан путем модификации report.cls из /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 %
 % Вдохновлен стилем G2-105 за авторством Алексея Томина, Михаила Конника, Андрея Спицыны, Ивана Короткова и Всеволода Крищенко.
 %
@@ -37,7 +37,7 @@
 %%%% Тут у нас определяются опции класса
 \newcommand\@ptsize{}
 
-\newif\if@restonecol  
+\newif\if@restonecol
 \newif\if@titlepage
 \@titlepagetrue
 \newif\if@openright
@@ -106,20 +106,20 @@
 %%%%% -----------------------------------------------------
 
 
-\setlength\lineskip{1\p@}                
-\setlength\normallineskip{1\p@}           
+\setlength\lineskip{1\p@}
+\setlength\normallineskip{1\p@}
 
 
 \renewcommand\baselinestretch{}
-\setlength\parskip{0\p@ \@plus \p@}   
+\setlength\parskip{0\p@ \@plus \p@}
 \@lowpenalty   51
 \@medpenalty  151
 \@highpenalty 301
-\setcounter{topnumber}{2} 
+\setcounter{topnumber}{2}
 \renewcommand\topfraction{.7}
 \setcounter{bottomnumber}{1}
 \renewcommand\bottomfraction{.3}
-\setcounter{totalnumber}{3} 
+\setcounter{totalnumber}{3}
 \renewcommand\textfraction{.2}
 \renewcommand\floatpagefraction{.5}
 \setcounter{dbltopnumber}{2}
@@ -328,8 +328,8 @@
 %}
 
 
-% Абзацный отступ: 
-%       - 15..17 мм в ГОСТ 2.105 
+% Абзацный отступ:
+%       - 15..17 мм в ГОСТ 2.105
 %       - 12.5 мм в ГОСТ 7.0.11 и 7.32
 \setlength\parindent{12,5mm}  % в report отсутсвует, потребуется переопределить для ГОСТ 7.0.11 и 7.32
 
@@ -357,7 +357,7 @@
 \newlength\DSTU@MainChapterIndent \setlength\DSTU@MainChapterIndent{\parindent}
 \newlength{\DSTU@TitleDropSkip}   \setlength\DSTU@TitleDropSkip{\DSTUBetweenTitleSkip}
                                     \addtolength\DSTU@TitleDropSkip{-\DSTUAfterTitleSkip}
-                                    
+
 %%  стиль всех заголовков, \normalfont оставлен
 \newcommand\DSTUTitleStyle{\normalfont\bfseries}
 \newcommand\DSTU@MainChapterStyle{\large\bfseries}
@@ -407,12 +407,12 @@
 \newcounter {section}[chapter]              % совпадает с 2-105
 \newcounter {subsection}[section]           % совпадает с 2-105
 \newcounter {subsubsection}[subsection]     % совпадает с 2-105
-\newcounter {paragraph}[subsubsection]      
+\newcounter {paragraph}[subsubsection]
 \newcounter {subparagraph}[paragraph]
 \renewcommand \thechapter        {\@arabic\c@chapter}                       % совпадает с 2-105
-\renewcommand \thesection        {\ifnum \c@chapter>\z@ \thechapter.\fi\@arabic\c@section}           % совпадает с 2-105 
-\renewcommand\thesubsection      {\thesection.\@arabic\c@subsection}        % совпадает с 2-105 
-\renewcommand\thesubsubsection   {\thesubsection.\@arabic\c@subsubsection}  % совпадает с 2-105 
+\renewcommand \thesection        {\ifnum \c@chapter>\z@ \thechapter.\fi\@arabic\c@section}           % совпадает с 2-105
+\renewcommand\thesubsection      {\thesection.\@arabic\c@subsection}        % совпадает с 2-105
+\renewcommand\thesubsubsection   {\thesubsection.\@arabic\c@subsubsection}  % совпадает с 2-105
 \renewcommand\theparagraph       {\ifnum \c@chapter>\z@ \thechapter.\fi\ifnum \c@section>\z@ \@arabic\c@section.\fi\ifnum \c@subsection>\z@ \@arabic\c@subsection.\fi\ifnum \c@subsubsection>\z@ \@arabic\c@subsubsection.\fi\@arabic\c@paragraph}
 \renewcommand\thesubparagraph    {\theparagraph.\@arabic\c@subparagraph}
 \newcommand\@chapapp             {\chaptername}
@@ -447,27 +447,27 @@
 %    \@afterindentfalse
 %\secdef\@chapter\@schapter}
 
-% Используется для chapter без звезды                    
-\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne                               % совпадает с 2-105 
-                         \refstepcounter{chapter}%                             % совпадает с 2-105 
-                         \typeout{\@chapapp\space\thechapter.}%                % совпадает с 2-105 
-                         \addcontentsline{toc}{chapter}%                       % совпадает с 2-105 
-                                   {\protect\numberline{\thechapter}#1}%       % совпадает с 2-105 
-                    \else                                                      % совпадает с 2-105 
-                      \addcontentsline{toc}{chapter}{#1}%                      % совпадает с 2-105 
-                    \fi                                                        % совпадает с 2-105  
-                    \chaptermark{#1}%                                          % совпадает с 2-105 
-                    \addtocontents{lof}{\protect\addvspace{10\p@}}%            % совпадает с 2-105 
-                    \addtocontents{lot}{\protect\addvspace{10\p@}}%            % совпадает с 2-105 
-                    \if@twocolumn                                              
-                      \@topnewpage[\@makechapterhead{#2}]%                     
-                    \else                                                  
-                      \@makechapterhead{#2}%                                   % совпадает с 2-105 
-                      \@afterheading                                           % совпадает с 2-105 
+% Используется для chapter без звезды
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne                               % совпадает с 2-105
+                         \refstepcounter{chapter}%                             % совпадает с 2-105
+                         \typeout{\@chapapp\space\thechapter.}%                % совпадает с 2-105
+                         \addcontentsline{toc}{chapter}%                       % совпадает с 2-105
+                                   {\protect\numberline{\thechapter}#1}%       % совпадает с 2-105
+                    \else                                                      % совпадает с 2-105
+                      \addcontentsline{toc}{chapter}{#1}%                      % совпадает с 2-105
+                    \fi                                                        % совпадает с 2-105
+                    \chaptermark{#1}%                                          % совпадает с 2-105
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%            % совпадает с 2-105
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%            % совпадает с 2-105
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%                                   % совпадает с 2-105
+                      \@afterheading                                           % совпадает с 2-105
                     \fi}
-           
-          
-% Верстка заголовка chapter:                    
+
+
+% Верстка заголовка chapter:
 \def\@makechapterhead#1{%
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
@@ -478,8 +478,8 @@
     \DSTU@ChapterStyle{#1}\par\nobreak
     \vspace{\DSTUAfterTitleSkip}
   }}
- 
-  
+
+
 % Используется для chapter*
 \def\@schapter#1{\if@twocolumn
                    \@topnewpage[\@makeschapterhead{#1}]%
@@ -488,7 +488,7 @@
                    \@makeschapterhead{#1}%
                    \@afterheading
                  \fi}
-                 
+
 % Верстка заголовка chapter*
 \def\@makeschapterhead#1{%
   {\parindent \z@ \raggedright
@@ -524,7 +524,7 @@
 %                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
 %                                     {1.5ex \@plus .2ex}%
 %                                     {\normalfont\bfseries}}
-%%  Из 2-105 (пункт) 
+%%  Из 2-105 (пункт)
 %%  ... попадающий в оглавление
 %\newcommand\subsection{%
 % \@startsection{subsection}{2}%
@@ -539,9 +539,9 @@
 % \hspace{\DSTUHTitleSpace}%
 %}
 %\newcommand*{\npara}[1]{\nsubsection\label{#1}}
-                                     
 
-% Магия подподраздела 
+
+% Магия подподраздела
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\DSTUTitleIndent}%
                                      {\DSTUBeforTitleSkip}%
                                      {\DSTUAfterTitleSkip}%
@@ -566,22 +566,22 @@
 % \hspace{\DSTUHTitleSpace}%
 %}
 %\newcommand*\nsubpara[1]{\nsubsubsection\label{#1}}
- 
-                                     
-% Магия параграфа из report.cls      (в 2-105 был закомментированный более навороченный вариант, но использовался этот )                          
+
+
+% Магия параграфа из report.cls      (в 2-105 был закомментированный более навороченный вариант, но использовался этот )
 %\newcommand\paragraph{\@startsection{paragraph}{3}{\z@}%   % только не 3, а 4 в 2-105
 %                                    {0.3ex} % в report было 3.25ex \@plus1ex \@minus.2ex
 %                                    {-1em}  % -1em
 %                                    {\normalfont\normalsize}} % в report было {\normalfont\normalsize\bfseries}
-                                    
+
 \newcommand\paragraph{\secdef\@paragraph\@sparagraph}
 
-% Используется для paragraph без звезды                    
-\def\@paragraph[#1]#2{\refstepcounter{paragraph} 
+% Используется для paragraph без звезды
+\def\@paragraph[#1]#2{\refstepcounter{paragraph}
                       %\par \@tempskipa -3.25ex\@plus -1ex \@minus -.2ex \relax
                       \@makeparagraphhead{#2}%
 }
-           
+
 % Верстка paragraph в основном тексте
 \def\@makeparagraphhead#1{%
 %\noindent\space\space\theparagraph\space#1
@@ -592,21 +592,21 @@
 \def\@sparagraph#1{\@makesparagraphhead{#1}}
 % Верстка заголовка paragraph*
 \def\@makesparagraphhead#1{#1}
-  
-  
+
+
 % Магия подпараграфа из report.cls (совпадает с 2-105)
 %\newcommand\subparagraph{\@startsection{subparagraph}{4}{\z@}% % только не 4, а 5 в 2-105
 %                                       {0.3ex} % в report было 3.25ex \@plus1ex \@minus.2ex
 %                                       {-1em}  % -1em
-%                                      {\normalfont\normalsize}} % в report было {\normalfont\normalsize\bfseries}  
+%                                      {\normalfont\normalsize}} % в report было {\normalfont\normalsize\bfseries}
 
 \newcommand\subparagraph{\secdef\@subparagraph\@ssubparagraph}
 
-% Используется для subparagraph без звезды                    
-\def\@subparagraph[#1]#2{\refstepcounter{subparagraph} 
-                      \@makesubparagraphhead{#2}%                                   
+% Используется для subparagraph без звезды
+\def\@subparagraph[#1]#2{\refstepcounter{subparagraph}
+                      \@makesubparagraphhead{#2}%
                     }
-           
+
 % Верстка subparagraph в основном тексте
 \def\@makesubparagraphhead#1{%
 %\noindent\space\space\thesubparagraph\space#1
@@ -638,14 +638,14 @@
   \setlength\leftmarginvi {1em}           % отсутствует в 2-105
 \fi
 
-\setlength  \labelsep  {.5em}             % совпадает с 2-105 
-\setlength  \labelwidth{\leftmargini}     % совпадает с 2-105 
-\addtolength\labelwidth{-\labelsep}       % совпадает с 2-105 
+\setlength  \labelsep  {.5em}             % совпадает с 2-105
+\setlength  \labelwidth{\leftmargini}     % совпадает с 2-105
+\addtolength\labelwidth{-\labelsep}       % совпадает с 2-105
 
 % Что-то, связаннное с разрывом строк
-\@beginparpenalty -\@lowpenalty           % совпадает с 2-105 
-\@endparpenalty   -\@lowpenalty           % совпадает с 2-105 
-\@itempenalty     -\@lowpenalty           % совпадает с 2-105 
+\@beginparpenalty -\@lowpenalty           % совпадает с 2-105
+\@endparpenalty   -\@lowpenalty           % совпадает с 2-105
+\@itempenalty     -\@lowpenalty           % совпадает с 2-105
 
 
 
@@ -657,13 +657,13 @@
 %\newlength{\NSLItemNestedIndent}
 
 %\newcommand\NSL@List{%
-%    \setlength{\itemsep}{.5\parskip}%                пробел между последовательными элементами
+%    \setlength{\itemsep}{.5\parskip}%         пробел между последовательными элементами
 %    \setlength{\topsep}{0mm}%                 отступ от текста до перечня (и от перечня до текста)
 %    \setlength{\partopsep}{0mm}%              дополнительный отступ,  если начали абзац
 %    \setlength{\listparindent}{\parindent}%   Красная строка
-%    \setlength{\parsep}{\parskip}%                 расстояние между абзацами внутри пункта
+%    \setlength{\parsep}{\parskip}%            расстояние между абзацами внутри пункта
 %    \setlength{\leftmargin}{0mm}% левый отступ до текста
-%    \setlength{\itemindent}{\NSLItemIndent}%             дополнительный левый отступ первой строчки
+%    \setlength{\itemindent}{\NSLItemIndent}%  дополнительный левый отступ первой строчки
 %    \setlength{\labelsep}{2\NSLItemGap}%     от метки до текста
 %}
 %
@@ -741,8 +741,8 @@
                {\endlist}
 \newcommand*\descriptionlabel[1]{\hspace\labelsep
                                 \normalfont\bfseries #1}
-                                
-                                
+
+
 % Абстракт как он был в report, но с правками
 %\if@titlepage
 %  \newenvironment{abstract}{%
@@ -781,7 +781,7 @@
                         \advance\leftmargin 1.5em}%
                 \item\relax}
                {\endlist}
-               
+
 \newenvironment{quotation}
                {\list{}{\listparindent 1.5em%
                         \itemindent    \listparindent
@@ -789,15 +789,15 @@
                         \parsep        \z@ \@plus\p@}%
                 \item\relax}
                {\endlist}
-               
+
 \newenvironment{quote}
                {\list{}{\rightmargin\leftmargin}%
                 \item\relax}
                {\endlist}
-           
 
 
-% Определение титульной страницы            
+
+% Определение титульной страницы
 \if@compatibility
 \newenvironment{titlepage}
     {%
@@ -853,7 +853,7 @@
     \addtocontents{lot}{\protect\addvspace{10\p@}}%
     \@makeappendixhead{##2}%
     \@afterheading
-  }  
+  }
 }
 
 \def\@makeappendixhead#1{%
@@ -867,7 +867,7 @@
     \vspace{\DSTUAfterTitleSkip}
   }
 }
-  
+
 % Из 2-105
 %\newif\ifDSTU@HaveAppendices
 %\DSTU@HaveAppendicesfalse
@@ -893,10 +893,10 @@
 %    \DSTU@ChapterStyle{##1}\par\nobreak
 %    \vspace{\DSTUAfterTitleSkip}
 %  }}
-%}  
-  
-  
-  
+%}
+
+
+
 \setlength\arraycolsep{5\p@}          % совпадает с 2-105 (только сгруппировано выше было)
 \setlength\tabcolsep{6\p@}            % совпадает с 2-105
 \setlength\arrayrulewidth{.4\p@}      % совпадает с 2-105
@@ -928,10 +928,10 @@
 %  \settowidth\DSTU@@EqRemLen{где}%
 %  \addtolength\DSTU@EqRemLen{-\DSTU@@EqRemLen}%
 % \makeatother%
-%}  
-  
-  
-% Рисунки  
+%}
+
+
+% Рисунки
 \newcounter{figure}[chapter]  % в 2-105 не через PicInChapter
 \renewcommand \thefigure
      {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@figure}
@@ -940,21 +940,21 @@
 %    \@addtoreset{figure}{chapter}%
 %    \@figuresonchaptertrue%
 %    \renewcommand{\thefigure}{\thechapter.\arabic{figure}}%
-%} 
-     
+%}
+
 \def\fps@figure{tbp} % в 2-105: \def\fps@figure{bph}
 \def\ftype@figure{1}
-\def\ext@figure{lof} 
+\def\ext@figure{lof}
 \def\fnum@figure{\figurename\nobreakspace\thefigure} % в 2-105: \figurename~\thefigure
-\newenvironment{figure}                              % совпадает с 2-105
-               {\@float{figure}}
+\newenvironment{figure}[1][tbp]                              % совпадает с 2-105
+               {\@float{figure}[#1] \centering}
                {\end@float}
-\newenvironment{figure*}                             % совпадает с 2-105
-               {\@dblfloat{figure}}
+\newenvironment{figure*}[1][tbp]                             % совпадает с 2-105
+               {\@dblfloat{figure}[#1] \centering}
                {\end@dblfloat}
 
 
-% Таблицы               
+% Таблицы
 \newcounter{table}[chapter] % в 2-105 без chapter с добавлением его по TableInChapter ниже
 \renewcommand \thetable
      {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@table}
@@ -962,11 +962,11 @@
 \def\ftype@table{2}     %  2-105: 1
 \def\ext@table{lot}     % совпадает с 2-105
 \def\fnum@table{\tablename\nobreakspace\thetable} %  2-105: \tablename~\thetable
-\newenvironment{table}               % совпадает с 2-105
-               {\@float{table}}
+\newenvironment{table}[1][tbp]               % совпадает с 2-105
+               {\@float{table}[#1] \centering}
                {\end@float}
-\newenvironment{table*}              % совпадает с 2-105
-               {\@dblfloat{table}}
+\newenvironment{table*}[1][tbp]              % совпадает с 2-105
+               {\@dblfloat{table}[#1] \centering}
                {\end@dblfloat}
 % Из 2-105:
 %%  Подпись к таблице
@@ -977,7 +977,7 @@
 %    \@addtoreset{table}{chapter}%
 %    \@tablesonchaptertrue%
 %    \renewcommand{\thetable}{\thechapter.\arabic{table}}%
-%}    
+%}
 
 
 % Отступы вокруг подписей к плавающим объектам
@@ -996,15 +996,15 @@
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
   \fi
   \vskip\belowcaptionskip}
-  
- 
+
+
 %%для русского языка, взято из 2-105, в report отсутствует
 \righthyphenmin=2
 \unitlength=1mm
 \clubpenalty=10000
 \widowpenalty=10000
 
-  
+
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
 \DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
 \DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
@@ -1047,8 +1047,8 @@
     \if@restonecol\twocolumn\fi
     }
 %всякие оглавления - из 2-105
-%\newcommand\tableofcontents{\chapter*{\contentsname}\@starttoc{toc}}%    
-    
+%\newcommand\tableofcontents{\chapter*{\contentsname}\@starttoc{toc}}%
+
 % Настройки верстки элементов в оглавлении
 \newcommand*\l@part[2]{%
   \ifnum \c@tocdepth >-2\relax
@@ -1085,7 +1085,7 @@
 \newcommand{\l@chapter}         {\@dottedtocline{1}{0mm}{1.2em}} % простой вариант из 2-105
 
 %\newcommand*\l@section         {\@dottedtocline{1}{1.5em}{2.3em}} % так было в report
-\newcommand*\l@section          {\@dottedtocline{1}{.8em}{2em}} 
+\newcommand*\l@section          {\@dottedtocline{1}{.8em}{2em}}
 %\newcommand{\l@section}        {\@dottedtocline{2}{.8em}{2em}}    % а так в 2-105
 \newcommand*\l@subsection       {\@dottedtocline{2}{3.8em}{3.2em}} % так было в report
 %\newcommand{\l@subsection}     {\@dottedtocline{3}{1.6em}{2.7em}}
@@ -1115,9 +1115,9 @@
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
     }
-    
 
-% Список таблиц, мы не используем, оставляю для совместимости    
+
+% Список таблиц, мы не используем, оставляю для совместимости
 \newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
 \newcommand\listoftables{%
     \if@twocolumn
@@ -1132,9 +1132,9 @@
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
     }
-    
-    
-% Библиография из report.cls    
+
+
+% Библиография из report.cls
 % Переведена на biblatex, пока работает из коробки без правок этого кода
 \let\l@table\l@figure
 \newdimen\bibindent
@@ -1159,7 +1159,7 @@
        {\@latex@warning{Empty `thebibliography' environment}}%
       \endlist}
 \newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
-\let\@openbib@code\@empty      
+\let\@openbib@code\@empty
 % Из 2-105:
 %%библиография
 %\newcounter{biblio}
@@ -1187,9 +1187,9 @@
 %\setlength\bibindent{1.5em}
 %
 %% Точки после номеров в библиографии. Несовместимо с natbib! -- Коротков И.
-%%\renewcommand*{\@biblabel}[1]{\hfill#1.}      
-      
-      
+%%\renewcommand*{\@biblabel}[1]{\hfill#1.}
+
+
 % Индекс, мы не используем, оставляю для совместимости с report.cls
 \newenvironment{theindex}
                {\if@twocolumn
@@ -1222,9 +1222,9 @@
     \parindent 1em%
     \noindent
     \hb@xt@1.8em{\hss\@makefnmark}#1}
-    
-    
-% Есть только в report    
+
+
+% Есть только в report
 \newcommand\contentsname{Contents}
 \newcommand\listfigurename{List of Figures}
 \newcommand\listtablename{List of Tables}
@@ -1243,8 +1243,8 @@
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
   \space\number\day, \number\year}
-  
-  
+
+
 \setlength\columnsep{10\p@}     % совпадают с 2-105
 \setlength\columnseprule{0\p@}
 
@@ -1283,7 +1283,7 @@
 %% Проценты в URL в библиографии
 %\def\BibUrl{\url}
 %
-%\newcommand\AfterHyperrefFix{% issue #31 fix (https://github.com/latex-g7-32/latex-g7-32/issues/31) 
+%\newcommand\AfterHyperrefFix{% issue #31 fix (https://github.com/latex-g7-32/latex-g7-32/issues/31)
 % \makeatletter
 % \let\DSTU@old@sect\@sect
 % \def\@sect##1##2##3##4##5##6[##7]##8{%

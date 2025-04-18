@@ -6,12 +6,13 @@
 
 % Сокращения различных названий
 % !!! Изменять в преамбуле !!!
-% Скорее всего преамбула называется "00-preamble.tex"
+% Скорее всего преамбула называется "preamble.inc.tex"
 
 % Даты начала и конца работы
 \newcommand{\startDay}			{03}
 \newcommand{\startMonth}		{июня}
 \newcommand{\startYear}			{2024}
+\newcommand{\startDate}			{<<\startDay>> \startMonth\ \startYear г.}
 \newcommand{\finalDay}			{03}
 \newcommand{\finalMonth}		{июля}
 \newcommand{\finalYear}			{2024}
@@ -37,7 +38,7 @@
 % Названия конкретного документа
 \newcommand{\docTypeFull}		{Пояснительная записка} % Тип документа (тоже в DSTUEskd.sty ищи)
 \newcommand{\docType}			{УП}
-\newcommand{\module}			{Учебная практика} % Вид практики или название дисциплины курсача
+\newcommand{\module}			{Учебная практика} % Вид практики или название дисциплины курсача/лабы
 \newcommand{\internOrg}			{\schoolName} % Название предприятия практики
 \newcommand{\devNameFull}		{Вундервафля кармическая} % Название темы для курсача
 \newcommand{\devName}			{ВК} % наверное только для рамок
@@ -54,13 +55,11 @@
 
 	МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ
 
-	\textbf{\orgNameFull\\(ДГТУ)}
+	\textbf{\orgNameFull\\(ДГТУ)} % Полное название универа
 
 	\vfill
 
-	\raggedright \schoolNameFull
-
-	\vfill
+	\raggedright \schoolNameFull % Название факультета
 	}
 
 % Табличка на титульник с директором и прочим дерьмом
@@ -86,12 +85,12 @@
 	\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut #3\hfill\mbox{}}%
 	}
 \newcommand*{\entxxx}[7]{{%
-#1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
-	\underlead\makebox[0pt]{#3}\underlead\mbox{}\quad%
-	\underlead\makebox[0pt]{#4}\underlead\mbox{}\\
-\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
-							\hfill 						\makebox[0pt]{#6}\hfill\quad
-							\hfill 						\makebox[0pt]{#7}\hfill\mbox{}%
+	#1	\underlead\makebox[0pt]{#2}\underlead\mbox{}\quad%
+		\underlead\makebox[0pt]{#3}\underlead\mbox{}\quad%
+		\underlead\makebox[0pt]{#4}\underlead\mbox{}\\
+	\vspace*{-1ex}\hphantom{#1} \hfill \scriptsize\strut 	\makebox[0pt]{#5}\hfill\quad
+								\hfill 						\makebox[0pt]{#6}\hfill\quad
+								\hfill 						\makebox[0pt]{#7}\hfill\mbox{}%
 }}
 
 
@@ -99,6 +98,8 @@
 	\begin{titlepage}
 		\centering\small
 		\titleHead
+
+		\hfill
 
 		\topTable
 
@@ -115,7 +116,7 @@
 		\entery{Обучающийся}{\developerFaImOt}%
 				{Фамилия Имя Отчество полностью}
 
-		\entery{Направленность (профиль)}{\mbox{}}{\mbox{}}
+		\entery{Направленность (профиль)}{\facName}{\mbox{}}
 
 		Обозначение курсового проекта \underlead\mbox{}\underlead Группа \underline{\makebox[5em]{\developerGroup}}\\
 			{\scriptsize\strut\mbox{}
@@ -141,6 +142,8 @@
 	\begin{titlepage}
 		\centering\small
 		\titleHead
+
+		\hfill
 
 		\centering
 		\textbf{ЗАДАНИЕ}
@@ -169,8 +172,38 @@
 		\entxxx{Руководитель проекта}{\mbox{}}{\schTutorPos}{\schTutorIOF}%
 				{подпись, дата}{должность}{И.О.Фамилия}
 
-		\entxxx{Обучающийся}{\mbox{}}{\finalDate}{\developerIOF}%
+		\entxxx{Обучающийся}{\mbox{}}{\startDate}{\developerIOF}%
 				{подпись}{дата}{И.О.Фамилия}
+	\end{titlepage}
+}
+
+\def\labMain#1{ % Принимает номер лабораторной (не вижу смысла выносить в переменные)
+	\begin{titlepage}
+		\centering
+		\titleHead
+
+		Направление \facKey\ \facName
+
+		\vfill\centering
+
+		\textbf{Лабораторная работа №#1}
+
+		по дисциплине\\ \module % Название дисциплины
+
+		\vfill
+
+		{\raggedleft
+		\begin{tabular}{rl}
+			Выполнил: & \developerIOF\ \developerGroup \\
+			Проверил: & \schTutorIOF
+		\end{tabular}
+
+		}\vfill
+
+		Ростов-на-Дону \\
+		\finalYear
+
+		\pagebreak
 	\end{titlepage}
 }
 
@@ -178,6 +211,8 @@
 	\begin{titlepage}
 		\centering\small
 		\titleHead
+
+		\hfill
 
 		\topTable
 
@@ -228,6 +263,8 @@
 		\centering\small
 		\titleHead
 
+		\hfill
+
 		\centering
 		\textbf{ЗАДАНИЕ}
 
@@ -271,6 +308,8 @@
 	\begin{titlepage}
 		\centering\small
 		\titleHead
+
+		\hfill
 
 		\topTable
 
